@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solo Art - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Kaushan+Script&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div id="side-menu" class="side-menu">
+        <a href="javascript:void(0)" class="close-btn" onclick="toggleMenu()">&times;</a>
+        <a href="#portfolio" onclick="toggleMenu()" data-lang="menu_portfolio">Portfolio</a>
+        <a href="#about" onclick="toggleMenu()" data-lang="menu_about">About Me</a>
+        <a href="#contact" onclick="toggleMenu()" data-lang="menu_contact">Contact</a>
+    </div>
+
+    <nav class="top-nav">
+        <div class="menu-icon" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        <div class="lang-icon" onclick="switchLanguage()" style="cursor: pointer;">EN / AR</div>
+    </nav>
+
+    <header class="hero">
+        <img src="logo.png" alt="Solo Art Logo" class="main-logo">
+        
+        <div class="hero-text">
+            <h2 dir="ltr"><span data-lang="hero_title">Digital Art</span> <span class="x-mark">×</span> ....</h2>
+            <p data-lang="hero_subtitle">Bold visuals. Smart creativity.</p>
+        </div>
+
+        <a href="#portfolio" class="neon-button">
+            <span data-lang="btn_portfolio">Portfolio</span> 
+            <i class="fas fa-chevron-right icon-right"></i>
+        </a>
+    </header>
+
+    <section id="portfolio">
+        <h2 class="neon-title" data-lang="section_portfolio">Portfolio</h2>
+        
+        <div class="gallery-grid">
+            <div class="card"><img src="solo/1.jpg" alt="Art 1"></div>
+            <div class="card"><img src="solo/2.jpg" alt="Art 2"></div>
+            <div class="card"><img src="solo/3.jpg" alt="Art 3"></div>
+            <div class="card"><img src="solo/4.jpg" alt="Art 4"></div>
+            <div class="card"><img src="solo/5.jpg" alt="Art 5"></div>
+        </div>
+
+        <div class="center-btn-container">
+            <a href="https://www.instagram.com/solo_n17/" class="neon-button" data-lang="btn_contact">Contact Me</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <h2 class="neon-title" data-lang="section_about">About Me</h2>
+        
+        <p class="about-text" data-lang="about_desc">
+            I'm a digital artist blending street art style with AI techniques. 
+            I create bold visuals for brands, games, and content creators.
+        </p>
+
+        <div class="center-btn-container">
+            <a href="https://www.instagram.com/solo_n17/" class="neon-button">
+                <span data-lang="btn_work">Let's Work Together</span> 
+                <i class="fas fa-arrow-right icon-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 style="margin-bottom: 20px; font-family: 'Kaushan Script'; color: #00f3ff;" data-lang="footer_title">Get In Touch</h2>
+        <a href="mailto:info@soloart.com" class="email">info@soloart.com</a>
+        
+        <div class="socials">
+            <a href="https://www.instagram.com/solo_n17/"><i class="fab fa-instagram"></i></a>
+        </div>
+        
+        <p class="copyright">© 2026 Solo Art. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // 1. قاموس الترجمة
+        const translations = {
+            en: {
+                menu_portfolio: "Portfolio",
+                menu_about: "About Me",
+                menu_contact: "Contact",
+                hero_title: "Digital Art",
+                hero_subtitle: "Bold visuals. Smart creativity.",
+                btn_portfolio: "Portfolio",
+                section_portfolio: "Portfolio",
+                btn_contact: "Contact Me",
+                section_about: "About Me",
+                about_desc: "Digital artist blending street art with a modern touch.I create bold visual identities for games, content creators, and businesses.",
+                btn_work: "Let's Work Together",
+                footer_title: "Get In Touch"
+            },
+            ar: {
+                menu_portfolio: "أعمالي",
+                menu_about: "من أنا",
+                menu_contact: "تواصل",
+                hero_title: "فن رقمي",
+                hero_subtitle: "تصاميم جريئة. إبداع ذكي.",
+                btn_portfolio: "تصفح أعمالي",
+                section_portfolio: "معرض الأعمال",
+                btn_contact: "تواصل معي",
+                section_about: "من أنا",
+                about_desc: "فنان رقمي أدمج أسلوب الستريت آرت مع لمسة عصريةأصنع هويات بصرية قوية للألعاب، صناع المحتوى، والشركات",
+                btn_work: "لنعمل معاً",
+                footer_title: "ابقى على تواصل"
+            }
+        };
+
+        let currentLang = "en"; // اللغة الافتراضية
+
+        // 2. دالة تبديل اللغة
+        function switchLanguage() {
+            // عكس اللغة الحالية
+            currentLang = currentLang === "en" ? "ar" : "en";
+            
+            // تغيير اتجاه الصفحة (RTL / LTR)
+            if (currentLang === "ar") {
+                document.body.classList.add("rtl");
+                document.documentElement.lang = "ar";
+            } else {
+                document.body.classList.remove("rtl");
+                document.documentElement.lang = "en";
+            }
+
+            // تحديث جميع النصوص التي لها data-lang
+            const elements = document.querySelectorAll("[data-lang]");
+            elements.forEach(element => {
+                const key = element.getAttribute("data-lang");
+                if (translations[currentLang][key]) {
+                    element.innerText = translations[currentLang][key];
+                }
+            });
+        }
+
+        // دالة القائمة الجانبية
+        function toggleMenu() {
+            var menu = document.getElementById("side-menu");
+            if (menu.style.width === "250px") {
+                menu.style.width = "0";
+            } else {
+                menu.style.width = "250px";
+            }
+        }
+    </script>
+
+</body>
+</html>
